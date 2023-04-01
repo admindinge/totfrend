@@ -1,3 +1,19 @@
+# Ignore node_modules directory
+node_modules/
+jspm_packages/
+
+# Ignore built files
+css/style.css
+js/script.js
+
+# Ignore sourcemaps
+*.map
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+
 # Logs
 logs
 *.log
@@ -37,9 +53,7 @@ bower_components
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
 
-# Dependency directories
-node_modules/
-jspm_packages/
+
 
 # TypeScript v1 declaration files
 typings/
