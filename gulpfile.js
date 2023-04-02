@@ -1,28 +1,27 @@
 const gulp = require('gulp');
-// const autoprefixer = require('gulp-autoprefixer');
+const autoprefixer = require('gulp-autoprefixer');
 const cleanCSS = require('gulp-clean-css');
 const concat = require('gulp-concat');
-// const imagemin = require('gulp-imagemin');
-//  const rename = require('gulp-rename');
+const rename = require('gulp-rename');
 const sourcemaps = require('gulp-sourcemaps');
 const uglify = require('gulp-uglify');
 const browserSync = require('browser-sync').create();
 const watch = require('gulp-watch');
 
-const cssFiles = ['./css/*.css', '!./css/style.css'];
-const jsFiles = ['./js/*.js', '!./js/main.js'];
+const cssFiles = ['./css/fonts.css','./css/reset.css','./css/**/*.css','./css/main.css', '!./css/*.min.css'];
+const jsFiles = ['./js/**/*.js', './js/main.js','!./js/*.min.js'];
 
 function styles() {
   return gulp.src(cssFiles)
     .pipe(sourcemaps.init())
     .pipe(concat('style.css'))
-    // .pipe(autoprefixer({
-    //   cascade: false
-    // }))
+    .pipe(autoprefixer({
+      cascade: false
+    }))
     .pipe(cleanCSS())
-    // .pipe(rename({
-      // suffix: '.min'
-    // }))
+    .pipe(rename({
+      suffix: '.min'
+    }))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./css/'))
 }
@@ -32,23 +31,25 @@ function scripts() {
     .pipe(sourcemaps.init())
     .pipe(concat('main.js'))
     .pipe(uglify())
-    // .pipe(rename({
-    //   suffix: '.min'
-    // }))
+    .pipe(rename({
+      suffix: '.min'
+    }))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./js/'))
 }
 
-// function images() {
-//   return gulp.src('./images/*')
-//     .pipe(imagemin())
-//     .pipe(gulp.dest('./images/'))
-// }
+async function optimizeImages() {
+  const imagemin = await import('gulp-imagemin');
+  return gulp.src('./images/*')
+    .pipe(imagemin())
+    .pipe(gulp.dest('./images/'));
+}
+
 
 function watchFiles() {
   gulp.watch(cssFiles, styles);
   gulp.watch(jsFiles, scripts);
-  // gulp.watch('./images/*', images);
+  gulp.watch('./images/*', optimizeImages);
 }
 
 function serve() {  
@@ -62,7 +63,7 @@ function serve() {
 
 exports.styles = styles;
 exports.scripts = scripts;
-// exports.images = images;
+exports.images = optimizeImages;
 exports.watch = watchFiles;
 exports.serve = serve;
 exports.default = gulp.series( gulp.parallel(styles, scripts), gulp.parallel(watchFiles, serve) );
