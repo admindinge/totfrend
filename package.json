@@ -20,7 +20,7 @@
     "gulp-watch": "^5.0.1"
   },
   "scripts": {
-    "postinstall": "mkdir -p images "
+    "postinstall": "mkdir -p images"
   },
   "dependencies": {
     "bpg-le-studio-02-caps": "^1.0.0"
