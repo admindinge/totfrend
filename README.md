@@ -6,7 +6,9 @@
 სისტემაში უნდა იდგეს nodejs და npm, მათ დასაყენებლად ინსტრუქცია მათ საიტზე უნდა ნახოთ.
 
 [Windows:](https://nodejs.org/en/download/)
+
 [macOS: ](https://nodejs.org/en/download/)
+
 [Linux: ](https://nodejs.org/en/download/package-manager/)
 
 მე პროექტი შევიმუშავე WSL Ubuntu გარემოში და Windows-ის აუცილებლობის შემთხვევაში მე ამ მოწყობას გავუწევ რეკომენდაციას
